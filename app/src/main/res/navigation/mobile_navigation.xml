@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -29,7 +30,11 @@
     <fragment
         android:id="@+id/btnsave"
         android:name="com.example.taskapp.ui.form.FormFragment"
-        android:label="FormFragment" />
+        android:label="FormFragment" >
+        <action
+            android:id="@+id/action_btnsave_self"
+            app:destination="@id/btnsave" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_Profile"
         android:name="com.example.taskapp.ui.Profile.ProfileFragment"

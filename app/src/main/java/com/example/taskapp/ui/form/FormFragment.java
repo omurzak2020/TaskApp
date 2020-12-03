@@ -6,18 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.taskapp.MainActivity;
 import com.example.taskapp.R;
 
 
 public class FormFragment extends Fragment {
     
-    private Button button; 
+    private Button button;
+    private EditText editText;
     
     public FormFragment() {
         // Required empty public constructor
@@ -40,12 +43,22 @@ public class FormFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         button = view.findViewById(R.id.btnsave);
+        editText = view.findViewById(R.id.editText);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("save", "onClick: hello hello ");
-                Toast.makeText(getContext(), "654654654", Toast.LENGTH_LONG).show();
+                save();
             }
         });
+    }
+
+    private void save() {
+        String text =editText.getText().toString();
+        Log.e("FormFragment", "onClick: hello hello "+text);
+        Toast.makeText(getContext(), "654654654", Toast.LENGTH_LONG).show();
+        Bundle bundle = new Bundle();
+        bundle.putString("text",text);
+        getParentFragmentManager().setFragmentResult("task",bundle);
+        ((MainActivity) requireActivity()).closeFragment();
     }
 }

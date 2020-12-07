@@ -47,18 +47,20 @@ public class FormFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if ( editText!= null){
                 save();
-            }
+            }}
         });
     }
 
     private void save() {
         String text =editText.getText().toString();
-        Log.e("FormFragment", "onClick: hello hello "+text);
-        Toast.makeText(getContext(), "654654654", Toast.LENGTH_LONG).show();
-        Bundle bundle = new Bundle();
-        bundle.putString("text",text);
-        getParentFragmentManager().setFragmentResult("task",bundle);
-        ((MainActivity) requireActivity()).closeFragment();
-    }
+//            Toast.makeText(getContext(), "Заполните текст", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "операция успешно добавлена", Toast.LENGTH_LONG).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("text",text);
+            getParentFragmentManager().setFragmentResult("task",bundle);
+            ((MainActivity) requireActivity()).closeFragment();
+            // Log.e("FormFragment", "onClick: hello hello "+text);
+        }
 }

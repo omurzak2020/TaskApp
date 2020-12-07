@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment  implements OnclickPositionn {
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                         String text =result.getString("text");
                         adapter.addItem(text);
-                    }
+                  }
                 });
     }
 

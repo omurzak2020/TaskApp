@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 
 import com.example.taskapp.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class ProfileFragment extends Fragment {
 
+    private CircleImageView img;
 
 
     public ProfileFragment() {
@@ -34,11 +37,18 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        img = view.findViewById(R.id.imgView);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGetCon
+            }
+        });
     }
 }

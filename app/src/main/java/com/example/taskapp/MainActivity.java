@@ -26,63 +26,45 @@ public class MainActivity extends AppCompatActivity {
 
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
-    private CircleImageView ProfileImage;
-    private static final int PICK_IMAGE = 1;
-    Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ProfileImage = (CircleImageView) findViewById(R.id.Profile);
+        initNavController();
+        navController.navigate(R.id.boardFragment );
+    }
+
+    private void initNavController() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-
-         appBarConfiguration = new AppBarConfiguration.Builder(
+        appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_Profile, R.id.btnsave)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.btnsave){
+                if (destination.getId() == R.id.navigation_home ||
+                        destination.getId() == R.id.navigation_dashboard ||
+                        destination.getId() == R.id.navigation_notifications ||
+                destination.getId() == R.id.navigation_Profile){
                     navView.setVisibility(View.VISIBLE);
-
+                }else {
+                    navView.setVisibility(View.GONE);
+                }
+                if(getSupportActionBar() != null){
+                    if (destination.getId() == R.id.boardFragment)
+                        getSupportActionBar().hide();
+                    else
+                        getSupportActionBar().show();
                 }
             }
         });
-//        ProfileImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent gallery =new Intent();
-//                gallery.setType("image/*");
-//                gallery.setAction(Intent.ACTION_GET_CONTENT);
-//
-//                startActivity(Intent.createChooser(gallery,"Sellect Picture"),PICK_IMAGE);
-//
-//            }
-//        });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE && requestCode == RESULT_OK){
-            imageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-                ProfileImage.setImageBitmap(bitmap);
-
-            }catch (IOException c){
-                c.printStackTrace();
-
-            }
-        }
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
